@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha server/**/*.test.js",
-    "test-watch": "nodemon --exec \"mocha server/**/*.test.js\""
+    "test": "mocha server/**/*.test.js -timeout 10000",
+    "test-watch": "nodemon --exec \"mocha server/**/*.test.js\" --timeout 10000"
   },
   "author": "",
   "license": "ISC",
