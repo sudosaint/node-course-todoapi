@@ -83,3 +83,25 @@ describe('GET /todos/id route',() => {
       .end(done);
   });
 });
+
+describe('DELETE /todos/:id', () => {
+  it("should remove a todo",(done) => {
+    var hexString = todos[0]._id.toHexString();
+    request(app)
+      .delete(`/todos/${hexString}`)
+      .expect(200)
+      .expect((res) => {
+        res.body.todo._id = hexString;
+      })
+      .end((err,res) => {
+        if (err){
+          return done(err);
+        }
+
+        Todo.findById(hexString).then((todo) => {
+          expect(todo).toNotExist();
+          done();
+        }).catch((e) => done(e));
+      });
+  });
+});
